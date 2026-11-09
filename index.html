@@ -136,6 +136,18 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 .lb .x{top:18px;right:18px}.lb .prev{left:18px;top:50%}.lb .next{right:18px;top:50%}
 @media (max-width:560px){.lb .prev,.lb .next{top:auto;bottom:18px}.lb .prev{left:30%}.lb .next{right:30%}}
 
+/* живой кадр в галерее */
+.s-g{grid-column:span 6;cursor:default!important}
+.shots figure.s-g video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.shots .live-dot{position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.4);border-radius:999px;padding:3px 10px 3px 8px;font-weight:600}
+.shots .live-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:#e8823f;box-shadow:0 0 8px #e8823f;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+/* бабочка над столпами */
+.pillars{position:relative;overflow:hidden}
+.pillars>.wrap{position:relative;z-index:2}
+.butterfly{position:absolute;left:0;top:0;width:38px;pointer-events:none;z-index:3;opacity:0;will-change:transform}
+@media (prefers-reduced-motion:reduce){.butterfly{display:none}}
+
 [data-lang="en"] .ru,[data-lang="ru"] .en{display:none}
 
 @media (max-width:900px){
@@ -240,6 +252,10 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       <figure class="s-d"><img src="img/bear.jpg" alt="Туман над Северным лесом" loading="lazy" data-t-ru="Туман над Северным лесом" data-q-ru="«Здесь прошло что-то большое»" data-t-en="Fog over the Northern Woods" data-q-en="“Something big walked here”"><figcaption class="ru"><b>Туман над Северным лесом</b><i>«Здесь прошло что-то большое»</i></figcaption><figcaption class="en"><b>Fog over the Northern Woods</b><i>“Something big walked here”</i></figcaption></figure>
       <figure class="s-e"><img src="img/bestiary.jpg" alt="Бестиарий" loading="lazy" data-t-ru="Бестиарий" data-q-ru="«У каждого зверя свои повадки - племя учится их читать»" data-t-en="Bestiary" data-q-en="“Every beast has its ways - the tribe learns to read them”"><figcaption class="ru"><b>Бестиарий</b><i>«У каждого зверя свои повадки - племя учится их читать»</i></figcaption><figcaption class="en"><b>Bestiary</b><i>“Every beast has its ways - the tribe learns to read them”</i></figcaption></figure>
       <figure class="s-f"><img src="img/saber.jpg" alt="Сумерки. Саблезубый" loading="lazy" data-t-ru="Сумерки. Саблезубый" data-q-ru="«Шаг, рык, бросок - успей уйти»" data-t-en="Dusk. The Saber-tooth" data-q-en="“A step, a growl, a leap - get away in time”"><figcaption class="ru"><b>Сумерки. Саблезубый</b><i>«Шаг, рык, бросок - успей уйти»</i></figcaption><figcaption class="en"><b>Dusk. The Saber-tooth</b><i>“A step, a growl, a leap - get away in time”</i></figcaption></figure>
+      <figure class="s-g"><span class="live-dot ru">Из игры</span><span class="live-dot en">In-game</span>
+        <video src="img/live/sparrows.mp4" poster="img/live/sparrows.jpg" muted loop playsinline preload="none" aria-label="Стайка воробьёв вспархивает при приближении охотника"></video>
+        <figcaption class="ru"><b>Стайка вспорхнула</b><i>«Тише. Птицы уже знают, что мы здесь»</i></figcaption>
+        <figcaption class="en"><b>The flock takes off</b><i>“Quiet. The birds already know we're here”</i></figcaption></figure>
     </div>
   </div>
 </section>
@@ -356,6 +372,23 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
   lb.querySelector('.x').onclick=close;lb.querySelector('.prev').onclick=function(){show(i-1)};lb.querySelector('.next').onclick=function(){show(i+1)};
   lb.addEventListener('click',function(e){if(e.target===lb)close()});
   document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)});
+})();
+</script>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* живой кадр: играет только на экране */
+  var v=document.querySelector('.s-g video');
+  if(v)new IntersectionObserver(function(es){if(es[0].isIntersecting){if(v.preload==='none'){v.preload='auto';v.load()}if(!reduce){var p=v.play();if(p&&p.catch)p.catch(function(){})}}else v.pause()},{rootMargin:'120px'}).observe(v);
+  /* бабочка пролетает над столпами */
+  var sec=document.querySelector('.pillars');if(!sec||reduce)return;var vis=false,tm=0;
+  function fly(){var img=new Image();img.src='img/live/butterfly.webp';img.className='butterfly';img.alt='';sec.appendChild(img);
+    var W=sec.clientWidth,H=sec.clientHeight,y0=H*(.15+Math.random()*.45),dur=(11+Math.random()*3)*1000,t0=performance.now(),ph=Math.random()*6.28,dir=Math.random()<.7?1:-1;
+    (function step(now){var f=(now-t0)/dur;if(f>1){img.remove();return}
+      var x=dir>0?-40+(W+80)*f:W+40-(W+80)*f,y=y0-f*H*.12+Math.sin(ph+f*6.28*1.9)*46+Math.sin(f*40)*4;
+      img.style.opacity=Math.min(1,Math.min(f,1-f)*10);img.style.transform='translate('+x+'px,'+y+'px) scaleX('+dir+')';requestAnimationFrame(step)})(t0)}
+  function loop(){if(!vis)return;fly();tm=setTimeout(loop,(14+Math.random()*8)*1000)}
+  new IntersectionObserver(function(es){var was=vis;vis=es[0].isIntersecting;if(vis&&!was){clearTimeout(tm);tm=setTimeout(loop,900)}if(!vis)clearTimeout(tm)},{threshold:.35}).observe(sec);
 })();
 </script>
 </body>
