@@ -7,7 +7,14 @@
 <meta name="description" content="TRIBES - кооперативное приключение каменного века для 1-4 игроков. Студия TEATeam Interactive. Проект реализован при поддержке Фонда содействия инновациям.">
 <meta property="og:title" content="TRIBES - TEATeam Interactive">
 <meta property="og:description" content="Маленькое племя в огромном неизвестном мире. Исследуйте, охотьтесь и выживайте вместе.">
-<meta property="og:image" content="img/hero.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rustemaskarov.github.io/teateam/">
+<meta property="og:image" content="https://rustemaskarov.github.io/teateam/img/og.jpg">
+<meta property="og:image:width" content="1600"><meta property="og:image:height" content="900">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141a22">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preload" as="image" href="img/hero.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -39,7 +46,7 @@ section{padding:80px 0}
 
 /* hero */
 .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;color:#fff;padding:0}
-.hero::before{content:"";position:absolute;inset:0;background:url(img/hero.jpg) center/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:url(img/hero.webp) center/cover no-repeat}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,16,.15) 0%,rgba(10,12,16,.25) 45%,rgba(10,12,16,.88) 100%)}
 .hero .wrap{position:relative;z-index:1;padding-bottom:72px;width:100%}
 .hero h1{font-size:clamp(64px,12vw,148px);letter-spacing:.08em;font-weight:700;text-shadow:0 4px 30px rgba(0,0,0,.5)}
@@ -80,6 +87,7 @@ section{padding:80px 0}
 .shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 10px;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
 .s-a{grid-column:span 4}.s-b{grid-column:span 2}.s-c{grid-column:span 3}.s-d{grid-column:span 3}.s-e{grid-column:span 2}.s-f{grid-column:span 4}
 .s-b img,.s-e img{aspect-ratio:auto;height:100%}
+.s-h{grid-column:span 2}
 
 /* features */
 .features .list{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 34px;margin-top:26px}
@@ -136,6 +144,31 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 .lb .x{top:18px;right:18px}.lb .prev{left:18px;top:50%}.lb .next{right:18px;top:50%}
 @media (max-width:560px){.lb .prev,.lb .next{top:auto;bottom:18px}.lb .prev{left:30%}.lb .next{right:30%}}
 
+/* дорожная карта */
+.roadmap{border-top:1px solid var(--line)}
+.road{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}
+.road::before{content:"";position:absolute;left:10%;right:10%;top:13px;height:2px;background:linear-gradient(90deg,var(--ember) 0 20%,var(--line) 20% 100%)}
+.road li{position:relative;text-align:center;padding:0 6px}
+.road .dot{position:relative;z-index:1;width:28px;height:28px;margin:0 auto 14px;border-radius:50%;background:var(--paper);border:2px solid var(--line);display:flex;align-items:center;justify-content:center}
+.road .done .dot{background:var(--ember);border-color:var(--ember);color:#fff}
+.road .done .dot svg{width:14px;height:14px}
+.road .next .dot{border-color:var(--ember)}
+.road .next .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--ember);animation:pulse 1.6s infinite}
+.road .when{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);font-weight:600}
+.road h3{font-size:21px;margin:4px 0 6px}
+.road p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+/* издателям и прессе */
+.press{background:var(--night-2);color:#e9e2d4}
+.press .eyebrow{color:var(--ember-2)}
+.press .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+.press p{color:#cfc6b6;font-size:16px;margin:0 0 12px}
+.press .kit{list-style:none;margin:0;padding:0;border:1px solid #344050;border-radius:14px;overflow:hidden}
+.press .kit li{display:flex;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid #344050;font-size:14px}
+.press .kit li:last-child{border-bottom:0}
+.press .kit span{color:#8f877a}
+.press .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.press .btn.ghost{border-color:rgba(244,236,220,.4);color:#f4ecdc;margin-left:0}
+.press .btn svg{width:18px;height:18px}
 /* живой кадр в галерее */
 .s-g{grid-column:span 6;cursor:default!important}
 .shots figure.s-g video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
@@ -157,6 +190,11 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
   .about .grid,.studio .grid{grid-template-columns:1fr}
   .cards{grid-template-columns:1fr 1fr}
   .features .list{grid-template-columns:1fr 1fr}
+  .road{grid-template-columns:1fr;gap:0}
+  .road::before{left:13px;right:auto;top:14px;bottom:14px;width:2px;height:auto;background:linear-gradient(180deg,var(--ember) 0 12%,var(--line) 12% 100%)}
+  .road li{display:grid;grid-template-columns:28px 1fr;column-gap:16px;text-align:left;padding:0 0 22px}
+  .road .dot{margin:0;grid-row:span 3}
+  .press .grid{grid-template-columns:1fr}
   .shots{grid-template-columns:1fr 1fr}
   .shots figure{grid-column:span 2!important}
   footer .cols{grid-template-columns:1fr}
@@ -178,7 +216,9 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       <a href="#about"><span class="ru">Об игре</span><span class="en">About</span></a>
       <a href="#gallery"><span class="ru">Кадры</span><span class="en">Screenshots</span></a>
       <a href="#features"><span class="ru">Особенности</span><span class="en">Features</span></a>
+      <a href="#roadmap"><span class="ru">Планы</span><span class="en">Roadmap</span></a>
       <a href="#studio"><span class="ru">Студия</span><span class="en">Studio</span></a>
+      <a href="#press"><span class="ru">Прессе</span><span class="en">Press</span></a>
     </nav>
     <div class="right"><a class="steam-mini js-steam" href="#" aria-label="Steam"><svg class="steam-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/></svg><span>Steam</span></a><button class="lang" id="lang" aria-label="Сменить язык">EN</button></div>
   </div>
@@ -224,7 +264,7 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       <p class="ru">Постоянный герой игры - племя, а не отдельный персонаж. Выживание здесь не цель, а источник историй, которые хочется пересказывать друзьям.</p>
       <p class="en">The true hero is the tribe, not a single character. Survival is not the goal - it is the source of stories you'll want to retell.</p>
     </div>
-    <img class="zoomable" src="img/mammoth.jpg" alt="Охота на мамонта" loading="lazy" data-t-ru="Охота на мамонта" data-q-ru="«Мамонта в одиночку не завалить»" data-t-en="Mammoth Hunt" data-q-en="“You can't hunt a mammoth alone”">
+    <img class="zoomable" src="img/about.webp" alt="Охотники несут добычу, над ними кружит ворона" loading="lazy" data-t-ru="Добыча" data-q-ru="«Донести бы до лагеря, пока вороны не налетели»" data-t-en="The kill" data-q-en="“Get it back to camp before the crows do”">
   </div>
 </section>
 
@@ -246,12 +286,15 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
     <div class="eyebrow ru">Кадры</div><div class="eyebrow en">Screenshots</div>
     <h2 class="ru">Мир TRIBES</h2><h2 class="en">The world of TRIBES</h2>
     <div class="shots">
-      <figure class="s-a"><img src="img/hero.jpg" alt="Ночь волков" loading="lazy" data-t-ru="Ночь волков" data-q-ru="«Мы просто хотели пережить первую ночь…»" data-t-en="Night of the Wolves" data-q-en="“We just wanted to survive the first night…”"><figcaption class="ru"><b>Ночь волков</b><i>«Мы просто хотели пережить первую ночь…»</i></figcaption><figcaption class="en"><b>Night of the Wolves</b><i>“We just wanted to survive the first night…”</i></figcaption></figure>
-      <figure class="s-b"><img src="img/tribe.jpg" alt="Люди племени" loading="lazy" data-t-ru="Люди племени" data-q-ru="«Род - не кровь, а общий огонь»" data-t-en="People of the Tribe" data-q-en="“Kin is not blood, but a shared fire”"><figcaption class="ru"><b>Люди племени</b><i>«Род - не кровь, а общий огонь»</i></figcaption><figcaption class="en"><b>People of the Tribe</b><i>“Kin is not blood, but a shared fire”</i></figcaption></figure>
-      <figure class="s-c"><img src="img/morning.jpg" alt="Первое утро" loading="lazy" data-t-ru="Первое утро" data-q-ru="«День 1 из 9. Холодает»" data-t-en="The First Morning" data-q-en="“Day 1 of 9. It's getting colder”"><figcaption class="ru"><b>Первое утро</b><i>«День 1 из 9. Холодает»</i></figcaption><figcaption class="en"><b>The First Morning</b><i>“Day 1 of 9. It's getting colder”</i></figcaption></figure>
-      <figure class="s-d"><img src="img/bear.jpg" alt="Туман над Северным лесом" loading="lazy" data-t-ru="Туман над Северным лесом" data-q-ru="«Здесь прошло что-то большое»" data-t-en="Fog over the Northern Woods" data-q-en="“Something big walked here”"><figcaption class="ru"><b>Туман над Северным лесом</b><i>«Здесь прошло что-то большое»</i></figcaption><figcaption class="en"><b>Fog over the Northern Woods</b><i>“Something big walked here”</i></figcaption></figure>
-      <figure class="s-e"><img src="img/bestiary.jpg" alt="Бестиарий" loading="lazy" data-t-ru="Бестиарий" data-q-ru="«У каждого зверя свои повадки - племя учится их читать»" data-t-en="Bestiary" data-q-en="“Every beast has its ways - the tribe learns to read them”"><figcaption class="ru"><b>Бестиарий</b><i>«У каждого зверя свои повадки - племя учится их читать»</i></figcaption><figcaption class="en"><b>Bestiary</b><i>“Every beast has its ways - the tribe learns to read them”</i></figcaption></figure>
-      <figure class="s-f"><img src="img/saber.jpg" alt="Сумерки. Саблезубый" loading="lazy" data-t-ru="Сумерки. Саблезубый" data-q-ru="«Шаг, рык, бросок - успей уйти»" data-t-en="Dusk. The Saber-tooth" data-q-en="“A step, a growl, a leap - get away in time”"><figcaption class="ru"><b>Сумерки. Саблезубый</b><i>«Шаг, рык, бросок - успей уйти»</i></figcaption><figcaption class="en"><b>Dusk. The Saber-tooth</b><i>“A step, a growl, a leap - get away in time”</i></figcaption></figure>
+      <figure class="s-a"><img src="img/hero.webp" alt="Ночь волков" loading="lazy" data-t-ru="Ночь волков" data-q-ru="«Мы просто хотели пережить первую ночь…»" data-t-en="Night of the Wolves" data-q-en="“We just wanted to survive the first night…”"><figcaption class="ru"><b>Ночь волков</b><i>«Мы просто хотели пережить первую ночь…»</i></figcaption><figcaption class="en"><b>Night of the Wolves</b><i>“We just wanted to survive the first night…”</i></figcaption></figure>
+      <figure class="s-b"><img src="img/tribe.webp" alt="Люди племени" loading="lazy" data-t-ru="Люди племени" data-q-ru="«Род - не кровь, а общий огонь»" data-t-en="People of the Tribe" data-q-en="“Kin is not blood, but a shared fire”"><figcaption class="ru"><b>Люди племени</b><i>«Род - не кровь, а общий огонь»</i></figcaption><figcaption class="en"><b>People of the Tribe</b><i>“Kin is not blood, but a shared fire”</i></figcaption></figure>
+      <figure class="s-c"><img src="img/shot-camp.webp" alt="Лагерь у края леса" loading="lazy" data-t-ru="Лагерь у края леса" data-q-ru="«Здесь мы переживём зиму»" data-t-en="Camp at the forest edge" data-q-en="“This is where we'll outlast the winter”"><figcaption class="ru"><b>Лагерь у края леса</b><i>«Здесь мы переживём зиму»</i></figcaption><figcaption class="en"><b>Camp at the forest edge</b><i>“This is where we'll outlast the winter”</i></figcaption></figure>
+      <figure class="s-d"><img src="img/shot-bear.webp" alt="Гость у сушилки" loading="lazy" data-t-ru="Гость у сушилки" data-q-ru="«Он пришёл на запах мяса»" data-t-en="A guest at the drying rack" data-q-en="“He came for the smell of meat”"><figcaption class="ru"><b>Гость у сушилки</b><i>«Он пришёл на запах мяса»</i></figcaption><figcaption class="en"><b>A guest at the drying rack</b><i>“He came for the smell of meat”</i></figcaption></figure>
+      <figure class="s-e"><img src="img/bestiary.webp" alt="Бестиарий" loading="lazy" data-t-ru="Бестиарий" data-q-ru="«У каждого зверя свои повадки - племя учится их читать»" data-t-en="Bestiary" data-q-en="“Every beast has its ways - the tribe learns to read them”"><figcaption class="ru"><b>Бестиарий</b><i>«У каждого зверя свои повадки - племя учится их читать»</i></figcaption><figcaption class="en"><b>Bestiary</b><i>“Every beast has its ways - the tribe learns to read them”</i></figcaption></figure>
+      <figure class="s-f"><img src="img/shot-saber.webp" alt="Сумерки. Саблезубый" loading="lazy" data-t-ru="Сумерки. Саблезубый" data-q-ru="«Шаг, рык, бросок - успей уйти»" data-t-en="Dusk. The Saber-tooth" data-q-en="“A step, a growl, a leap - get away in time”"><figcaption class="ru"><b>Сумерки. Саблезубый</b><i>«Шаг, рык, бросок - успей уйти»</i></figcaption><figcaption class="en"><b>Dusk. The Saber-tooth</b><i>“A step, a growl, a leap - get away in time”</i></figcaption></figure>
+      <figure class="s-h"><img src="img/shot-wolves.webp" alt="Огонь держит стаю" loading="lazy" data-t-ru="Огонь держит стаю" data-q-ru="«Пока горит костёр, волки ждут в темноте»" data-t-en="Fire holds the pack back" data-q-en="“While the fire burns, the wolves wait in the dark”"><figcaption class="ru"><b>Огонь держит стаю</b><i>«Пока горит костёр, волки ждут в темноте»</i></figcaption><figcaption class="en"><b>Fire holds the pack back</b><i>“While the fire burns, the wolves wait in the dark”</i></figcaption></figure>
+      <figure class="s-h"><img src="img/shot-winter.webp" alt="Первый снег" loading="lazy" data-t-ru="Первый снег" data-q-ru="«Осень кончилась за одну ночь»" data-t-en="First snow" data-q-en="“Autumn ended overnight”"><figcaption class="ru"><b>Первый снег</b><i>«Осень кончилась за одну ночь»</i></figcaption><figcaption class="en"><b>First snow</b><i>“Autumn ended overnight”</i></figcaption></figure>
+      <figure class="s-h"><img src="img/shot-ford.webp" alt="Брод" loading="lazy" data-t-ru="Брод" data-q-ru="«Вдвоём река не так страшна»" data-t-en="The ford" data-q-en="“The river is less scary for two”"><figcaption class="ru"><b>Брод</b><i>«Вдвоём река не так страшна»</i></figcaption><figcaption class="en"><b>The ford</b><i>“The river is less scary for two”</i></figcaption></figure>
       <figure class="s-g"><span class="live-dot ru">Из игры</span><span class="live-dot en">In-game</span>
         <video src="img/live/sparrows.mp4" poster="img/live/sparrows.jpg" muted loop playsinline preload="none" aria-label="Стайка воробьёв вспархивает при приближении охотника"></video>
         <figcaption class="ru"><b>Стайка вспорхнула</b><i>«Тише. Птицы уже знают, что мы здесь»</i></figcaption>
@@ -272,6 +315,20 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       <div class="feat"><h3 class="ru">Знания племени</h3><h3 class="en">Tribe knowledge</h3><p class="ru">Незнакомое сначала изучают: растения, камни, звери, места. Знания открывают новые действия и ремёсла.</p><p class="en">Study the unknown first - plants, stones, beasts, places. Knowledge unlocks new actions and crafts.</p></div>
       <div class="feat"><h3 class="ru">Хроника</h3><h3 class="en">Chronicle</h3><p class="ru">Охоты, потери и открытия складываются в собственную историю вашего племени.</p><p class="en">Hunts, losses and discoveries become your tribe's own story.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="roadmap" id="roadmap">
+  <div class="wrap">
+    <div class="eyebrow ru">Дорожная карта</div><div class="eyebrow en">Roadmap</div>
+    <h2 class="ru">Путь к релизу</h2><h2 class="en">The road to release</h2>
+    <ol class="road">
+      <li class="done"><div class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div class="when ru">2026</div><div class="when en">2026</div><h3 class="ru">Прототип</h3><h3 class="en">Prototype</h3><p class="ru">Сценарий «Первая зима»: девять дней, охота, лагерь, погода и сезоны.</p><p class="en">The “First Winter” scenario: nine days, hunting, camp, weather and seasons.</p></li>
+      <li class="next"><div class="dot"></div><div class="when ru">Декабрь 2026</div><div class="when en">December 2026</div><h3 class="ru">Анонс</h3><h3 class="en">Announcement</h3><p class="ru">Страница игры в Steam: можно добавить в желаемое.</p><p class="en">Steam page goes live: add TRIBES to your wishlist.</p></li>
+      <li class=""><div class="dot"></div><div class="when ru">Февраль 2027</div><div class="when en">February 2027</div><h3 class="ru">Демоверсия</h3><h3 class="en">Demo</h3><p class="ru">Первая ночь племени, доступная всем.</p><p class="en">The tribe's first night, open to everyone.</p></li>
+      <li class=""><div class="dot"></div><div class="when ru">Весна 2027</div><div class="when en">Spring 2027</div><h3 class="ru">Плейтесты</h3><h3 class="en">Playtests</h3><p class="ru">Открытые тесты с игроками и доработка по отзывам.</p><p class="en">Open tests with players and polish based on feedback.</p></li>
+      <li class=""><div class="dot"></div><div class="when ru">Май 2027</div><div class="when en">May 2027</div><h3 class="ru">Ранний доступ</h3><h3 class="en">Early Access</h3><p class="ru">Выход в раннем доступе Steam.</p><p class="en">Launch in Steam Early Access.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -304,6 +361,27 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
         <div class="fact"><b>PC</b><span class="ru">Windows и macOS, Steam</span><span class="en">Windows & macOS, Steam</span></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="press" id="press">
+  <div class="wrap grid">
+    <div>
+      <div class="eyebrow ru">Издателям и прессе</div><div class="eyebrow en">Publishers and press</div>
+      <h2 class="ru">Давайте поговорим</h2><h2 class="en">Let's talk</h2>
+      <p class="ru">Мы открыты к сотрудничеству с издателями и рады рассказать об игре журналистам, блогерам и стримерам. В пресс-ките - всё, что нужно для материала: описание, ключевые даты и кадры в высоком разрешении.</p>
+      <p class="en">We are open to working with publishers and happy to talk about the game with journalists, creators and streamers. The press kit has everything you need: a description, key dates and high-resolution screenshots.</p>
+      <div class="actions">
+        <a class="btn" href="press/TRIBES_presskit.zip" download><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg><span class="ru">Скачать пресс-кит</span><span class="en">Download press kit</span></a>
+        <a class="btn ghost" href="mailto:teateaminteractive@outlook.com?subject=TRIBES"><span class="ru">Написать нам</span><span class="en">Contact us</span></a>
+      </div>
+    </div>
+    <ul class="kit">
+      <li><b class="ru">Описание игры, RU и EN</b><b class="en">Fact sheet, RU and EN</b><span>PDF</span></li>
+      <li><b class="ru">10 кадров из игры</b><b class="en">10 in-game screenshots</b><span>1920x1080</span></li>
+      <li><b class="ru">Ключевой арт</b><b class="en">Key art</b><span>1600x900</span></li>
+      <li><b class="ru">Архив целиком</b><b class="en">Full archive</b><span class="ru">ZIP · 5,4 МБ</span><span class="en">ZIP · 5.4 MB</span></li>
+    </ul>
   </div>
 </section>
 
