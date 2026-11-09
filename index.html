@@ -25,7 +25,7 @@
   --putp:#6a2bd9;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
 body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -685,6 +685,19 @@ html,body{overflow-x:clip}
     var ps=[].slice.call(sec.querySelectorAll('.plant[data-c]'));if(!ps.length)return;var vis=false,tm=0;
     function loop(){if(!vis||!wide.matches)return;act(ps[Math.floor(Math.random()*ps.length)]);tm=setTimeout(loop,rnd(5000,9000))}
     new IntersectionObserver(function(es){var was=vis;vis=es[0].isIntersecting;if(vis&&!was){clearTimeout(tm);tm=setTimeout(loop,rnd(700,1500))}if(!vis)clearTimeout(tm)},{threshold:.3}).observe(sec)});
+})();
+</script>
+<script>
+/* сайт всегда открывается сверху; переходы по меню не добавляют #раздел в адрес */
+(function(){
+  try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch(e){}
+  if(location.hash){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+  function top(){scrollTo(0,0)}
+  top();addEventListener('load',function(){setTimeout(top,0)});addEventListener('pageshow',function(e){if(e.persisted)top()});
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+    var id=a.getAttribute('href');if(a.classList.contains('js-steam'))return;e.preventDefault();
+    if(id==='#'){scrollTo({top:0,behavior:'smooth'});return}
+    var el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})});
 })();
 </script>
 </body>
