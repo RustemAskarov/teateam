@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRIBES — TEATeam Interactive</title>
+<meta name="description" content="TRIBES — кооперативное приключение каменного века для 1–4 игроков. Студия TEATeam Interactive. Проект реализован при поддержке Фонда содействия инновациям.">
+<meta property="og:title" content="TRIBES — TEATeam Interactive">
+<meta property="og:description" content="Маленькое племя в огромном неизвестном мире. Исследуйте, охотьтесь и выживайте вместе.">
+<meta property="og:image" content="img/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1d1712; --paper:#f4ecdc; --paper-2:#eadfc8; --ember:#c8572b; --ember-2:#e8823f;
+  --moss:#4f5b3a; --night:#141a22; --night-2:#1f2732; --muted:#6c6153; --line:#d6c7a8;
+  --putp:#6a2bd9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;line-height:1.1;margin:0}
+h2{font-size:clamp(30px,4vw,44px);margin-bottom:14px}
+h3{font-size:24px;margin-bottom:6px}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ember);font-weight:600;margin-bottom:10px}
+section{padding:80px 0}
+
+/* top bar */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;background:rgba(20,26,34,.72);backdrop-filter:blur(8px);color:#f4ecdc}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.brand{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:700;letter-spacing:.06em;text-decoration:none}
+.nav{display:flex;gap:22px;font-size:14px}
+.nav a{text-decoration:none;opacity:.85}.nav a:hover{opacity:1}
+.lang{border:1px solid rgba(244,236,220,.4);background:none;color:inherit;border-radius:999px;padding:4px 12px;font:600 12px Inter;cursor:pointer}
+
+/* hero */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;color:#fff;padding:0}
+.hero::before{content:"";position:absolute;inset:0;background:url(img/hero.jpg) center/cover no-repeat}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,16,.15) 0%,rgba(10,12,16,.25) 45%,rgba(10,12,16,.88) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-bottom:72px;width:100%}
+.hero h1{font-size:clamp(64px,12vw,148px);letter-spacing:.08em;font-weight:700;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero p.lead{font-size:clamp(18px,2.2vw,22px);max-width:640px;margin:10px 0 26px;opacity:.95}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tag{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px;font-size:13px;background:rgba(0,0,0,.25)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ember);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600}
+.btn:hover{background:var(--ember-2)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.5);margin-left:10px}
+
+/* support band (required by grant) */
+.support{background:var(--night);color:#e9e2d4;padding:28px 0}
+.support .wrap{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:28px}
+.logo-fasie{background:#fff;border-radius:10px;padding:10px 14px;width:190px}
+.logo-putp{background:var(--putp);border-radius:10px;padding:10px 16px;width:120px}
+.support p{margin:0;font-size:15px;line-height:1.55}
+
+/* about */
+.about .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.about p{color:#3b3229;font-size:17px}
+.about img{border-radius:14px;box-shadow:0 20px 50px rgba(40,25,10,.25)}
+.quote{font-family:"Cormorant Garamond",serif;font-size:26px;font-style:italic;border-left:3px solid var(--ember);padding-left:18px;margin:22px 0;color:var(--ink)}
+
+/* pillars */
+.pillars{background:var(--paper-2)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card .n{font-family:"Cormorant Garamond",serif;font-size:34px;color:var(--ember);line-height:1}
+.card p{margin:8px 0 0;color:var(--muted);font-size:15px}
+
+/* gallery */
+.gallery{background:var(--night-2);color:#efe7d7}
+.gallery .eyebrow{color:var(--ember-2)}
+.shots{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:28px}
+.shots figure{margin:0;border-radius:12px;overflow:hidden;background:#000;position:relative}
+.shots figure img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .5s}
+.shots figure:hover img{transform:scale(1.03)}
+.shots figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 10px;font-size:13px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.s-a{grid-column:span 4}.s-b{grid-column:span 2}.s-c{grid-column:span 3}.s-d{grid-column:span 3}.s-e{grid-column:span 2}.s-f{grid-column:span 4}
+.s-b img,.s-e img{aspect-ratio:auto;height:100%}
+
+/* features */
+.features .list{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 34px;margin-top:26px}
+.feat h3{font-size:22px}
+.feat p{margin:0;color:var(--muted);font-size:15px}
+
+/* studio */
+.studio{background:var(--paper-2)}
+.studio .grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.studio ul{padding-left:18px;margin:10px 0 0;color:#3b3229}
+.studio li{margin:6px 0}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
+.fact b{display:block;font-family:"Cormorant Garamond",serif;font-size:30px;color:var(--ember)}
+.fact span{font-size:13px;color:var(--muted)}
+
+/* footer */
+footer{background:var(--night);color:#cfc6b6;padding:48px 0 32px;font-size:14px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+footer h4{margin:0 0 8px;color:#fff;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+footer .legal{border-top:1px solid #2c3540;margin-top:28px;padding-top:18px;font-size:12px;color:#8f877a}
+footer .logos{display:flex;gap:12px;margin-top:12px}
+
+[data-lang="en"] .ru,[data-lang="ru"] .en{display:none}
+
+@media (max-width:900px){
+  .nav{display:none}
+  .support .wrap{grid-template-columns:auto auto;}
+  .support p{grid-column:1/-1}
+  .about .grid,.studio .grid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}
+  .features .list{grid-template-columns:1fr 1fr}
+  .shots{grid-template-columns:1fr 1fr}
+  .shots figure{grid-column:span 2!important}
+  footer .cols{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  section{padding:56px 0}
+  .cards,.features .list,.facts{grid-template-columns:1fr}
+  .btn.ghost{margin:10px 0 0}
+  .logo-fasie{width:150px}.logo-putp{width:96px}
+}
+</style>
+</head>
+<body data-lang="ru">
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">TRIBES</a>
+    <nav class="nav">
+      <a href="#about"><span class="ru">Об игре</span><span class="en">About</span></a>
+      <a href="#gallery"><span class="ru">Кадры</span><span class="en">Screenshots</span></a>
+      <a href="#features"><span class="ru">Особенности</span><span class="en">Features</span></a>
+      <a href="#studio"><span class="ru">Студия</span><span class="en">Studio</span></a>
+    </nav>
+    <button class="lang" id="lang" aria-label="Сменить язык">EN</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#f0b27a">TEATeam Interactive</div>
+    <h1>TRIBES</h1>
+    <p class="lead ru">Кооперативное приключение каменного века. Маленькое племя в огромном неизвестном мире: исследуйте, охотьтесь и выживайте вместе — даже когда любой план идёт не так.</p>
+    <p class="lead en">A cooperative Stone Age adventure. A tiny tribe in a huge unknown world — explore, hunt and survive together, even when every plan goes wrong.</p>
+    <div class="tags">
+      <span class="tag ru">1–4 игрока</span><span class="tag en">1–4 players</span>
+      <span class="tag ru">Кооператив</span><span class="tag en">Co-op</span>
+      <span class="tag ru">Выживание</span><span class="tag en">Survival</span>
+      <span class="tag">PC · Windows · macOS</span>
+      <span class="tag ru">Демо — февраль 2027</span><span class="tag en">Demo — February 2027</span>
+      <span class="tag ru">Ранний доступ Steam — май 2027</span><span class="tag en">Steam Early Access — May 2027</span>
+    </div>
+    <a class="btn" href="#about"><span class="ru">Узнать больше</span><span class="en">Learn more</span></a>
+    <a class="btn ghost" href="#gallery"><span class="ru">Смотреть кадры</span><span class="en">See screenshots</span></a>
+  </div>
+</section>
+
+<!-- Обязательный блок поддержки Фонда (ТЗ, п. 3.2 б) -->
+<section class="support" aria-label="Поддержка проекта">
+  <div class="wrap">
+    <img class="logo-fasie" src="assets/fasie.svg" alt="Фонд содействия инновациям">
+    <img class="logo-putp" src="assets/putp.svg" alt="Платформа университетского технологического предпринимательства">
+    <p>Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» мероприятия «Платформа университетского технологического предпринимательства» федерального проекта «Технологии».</p>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap grid">
+    <div>
+      <div class="eyebrow ru">Об игре</div><div class="eyebrow en">About the game</div>
+      <h2 class="ru">Мы — маленькое племя</h2><h2 class="en">We are a tiny tribe</h2>
+      <p class="ru">TRIBES — приключение о небольшом племени каменного века, которое исследует неизвестный мир, делает открытия, развивает поселение и вместе переживает угрозы. Мир не объясняет себя: следы, дым, кровь, звуки и силуэты в тумане дают неполную информацию, а каждое открытие остаётся в памяти племени.</p>
+      <p class="en">TRIBES is an adventure about a small Stone Age tribe exploring an unknown world, making discoveries, growing a settlement and facing danger together. The world never explains itself: tracks, smoke, blood, sounds and silhouettes in the fog — and every discovery stays in the tribe's memory.</p>
+      <div class="quote ru">«Пошли за едой, кабан ранил товарища, мы понесли его, напали волки — и мясо пришлось оставить у реки».</div>
+      <div class="quote en">“We went out for food, a boar wounded our friend, we carried him back, wolves attacked — and we had to leave the meat by the river.”</div>
+      <p class="ru">Постоянный герой игры — племя, а не отдельный персонаж. Выживание здесь не цель, а источник историй, которые хочется пересказывать друзьям.</p>
+      <p class="en">The true hero is the tribe, not a single character. Survival is not the goal — it is the source of stories you'll want to retell.</p>
+    </div>
+    <img src="img/mammoth.jpg" alt="Охота на мамонта" loading="lazy">
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="wrap">
+    <div class="eyebrow ru">Столпы дизайна</div><div class="eyebrow en">Design pillars</div>
+    <h2 class="ru">Четыре идеи, на которых стоит игра</h2><h2 class="en">Four ideas behind the game</h2>
+    <div class="cards">
+      <div class="card"><div class="n">01</div><h3 class="ru">Неизвестное увлекает</h3><h3 class="en">The unknown pulls you in</h3><p class="ru">Открытие сильнее путевой точки. Вместо «мамонт 12 уровня» мир показывает, что здесь прошло что-то большое.</p><p class="en">Discovery beats waypoints. Instead of a “level 12 mammoth”, the world shows that something huge passed by.</p></div>
+      <div class="card"><div class="n">02</div><h3 class="ru">Выживаем вместе</h3><h3 class="en">Survive together</h3><p class="ru">Нести раненого, тащить тушу, отвлечь зверя, передать факел — совместные действия открывают возможности.</p><p class="en">Carry the wounded, haul a carcass, distract a beast, pass the torch — cooperation opens new options.</p></div>
+      <div class="card"><div class="n">03</div><h3 class="ru">Планы меняются</h3><h3 class="en">Plans change</h3><p class="ru">Упал в воду — погас факел — пришли волки. Ошибка рождает новую задачу, а не мгновенный проигрыш.</p><p class="en">Fall in the river, lose your torch, here come the wolves. Mistakes create new problems, not instant defeat.</p></div>
+      <div class="card"><div class="n">04</div><h3 class="ru">Открываем возможности</h3><h3 class="en">Unlock possibilities</h3><p class="ru">Прогрессия даёт новые способы действовать: топор — это поваленное дерево-мост, а не «+15% к сбору».</p><p class="en">Progression brings new ways to act: an axe means a fallen tree bridge, not “+15% gathering”.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="eyebrow ru">Кадры</div><div class="eyebrow en">Screenshots</div>
+    <h2 class="ru">Мир TRIBES</h2><h2 class="en">The world of TRIBES</h2>
+    <div class="shots">
+      <figure class="s-a"><img src="img/hero.jpg" alt="Ночь волков" loading="lazy"><figcaption class="ru">Ночь: волки у лагеря</figcaption><figcaption class="en">Night: wolves at the camp</figcaption></figure>
+      <figure class="s-b"><img src="img/tribe.jpg" alt="Племя" loading="lazy"><figcaption class="ru">Люди племени</figcaption><figcaption class="en">Tribe members</figcaption></figure>
+      <figure class="s-c"><img src="img/morning.jpg" alt="Утро в игре" loading="lazy"><figcaption class="ru">Утро первого дня: сбор ресурсов</figcaption><figcaption class="en">Day one morning: gathering</figcaption></figure>
+      <figure class="s-d"><img src="img/bear.jpg" alt="Медведь в тумане" loading="lazy"><figcaption class="ru">Туман: встреча с хищником</figcaption><figcaption class="en">Fog: a predator encounter</figcaption></figure>
+      <figure class="s-e"><img src="img/bestiary.jpg" alt="Бестиарий" loading="lazy"><figcaption class="ru">Бестиарий</figcaption><figcaption class="en">Bestiary</figcaption></figure>
+      <figure class="s-f"><img src="img/saber.jpg" alt="Саблезубый хищник" loading="lazy"><figcaption class="ru">Вечер: саблезубый хищник</figcaption><figcaption class="en">Dusk: a saber-tooth</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="eyebrow ru">Особенности</div><div class="eyebrow en">Features</div>
+    <h2 class="ru">Что ждёт игроков</h2><h2 class="en">What awaits you</h2>
+    <div class="list">
+      <div class="feat"><h3 class="ru">Кооператив на 1–4</h3><h3 class="en">Co-op for 1–4</h3><p class="ru">Играйте с друзьями или в одиночку с племенем NPC-спутников.</p><p class="en">Play with friends or solo with NPC tribe companions.</p></div>
+      <div class="feat"><h3 class="ru">Живые звери</h3><h3 class="en">Living animals</h3><p class="ru">Олени слышат и чуют по ветру, кабан предупреждает перед рывком, волки охотятся стаей ночью. Есть мамонт и саблезубый хищник.</p><p class="en">Deer hear and smell you downwind, boars warn before charging, wolves hunt in packs at night. Mammoths and saber-tooths roam.</p></div>
+      <div class="feat"><h3 class="ru">Погода и сезоны</h3><h3 class="en">Weather and seasons</h3><p class="ru">Дождь, снег, туман и ветер меняют охоту и выживание. Осень переходит в зиму.</p><p class="en">Rain, snow, fog and wind change hunting and survival. Autumn turns into winter.</p></div>
+      <div class="feat"><h3 class="ru">Лагерь и строительство</h3><h3 class="en">Camp and building</h3><p class="ru">Склад, навес, сушилка, шалаш и верстак. Огонь, тепло и запасы решают, переживёт ли племя ночь.</p><p class="en">Storage, shelter, drying rack, hut and workbench. Fire, warmth and food decide whether the tribe survives the night.</p></div>
+      <div class="feat"><h3 class="ru">Знания племени</h3><h3 class="en">Tribe knowledge</h3><p class="ru">Незнакомое сначала изучают: растения, камни, звери, места. Знания открывают новые действия и ремёсла.</p><p class="en">Study the unknown first — plants, stones, beasts, places. Knowledge unlocks new actions and crafts.</p></div>
+      <div class="feat"><h3 class="ru">Хроника</h3><h3 class="en">Chronicle</h3><p class="ru">Охоты, потери и открытия складываются в собственную историю вашего племени.</p><p class="en">Hunts, losses and discoveries become your tribe's own story.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="studio" id="studio">
+  <div class="wrap grid">
+    <div>
+      <div class="eyebrow ru">Студия</div><div class="eyebrow en">Studio</div>
+      <h2>TEATeam Interactive</h2>
+      <p class="ru">Онлайн-студия разработки видеоигр, которая использует нейросетевые технологии для быстрого и эффективного создания игрового контента. TRIBES — первая игра студии.</p>
+      <p class="en">An online game studio using neural-network technologies to create game content quickly and efficiently. TRIBES is the studio's first game.</p>
+      <ul class="ru">
+        <li>ИИ-агенты пишут и тестируют код игровых систем;</li>
+        <li>графика создаётся нейросетями по утверждённым эталонам стиля;</li>
+        <li>анимации животных — из сгенерированных видео;</li>
+        <li>человек отвечает за замысел, решения и приёмку качества.</li>
+      </ul>
+      <ul class="en">
+        <li>AI agents write and test gameplay code;</li>
+        <li>art is generated by neural networks from approved style references;</li>
+        <li>animal animations are cut from generated video;</li>
+        <li>humans own the vision, decisions and quality bar.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="facts">
+        <div class="fact"><b>Godot 4</b><span class="ru">открытый игровой движок</span><span class="en">open-source engine</span></div>
+        <div class="fact"><b>1–4</b><span class="ru">игрока в кооперативе</span><span class="en">co-op players</span></div>
+        <div class="fact"><b>2.5D</b><span class="ru">рисованные спрайты в 3D-мире</span><span class="en">painted sprites in a 3D world</span></div>
+        <div class="fact"><b>PC</b><span class="ru">Windows и macOS, Steam</span><span class="en">Windows & macOS, Steam</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>TEATeam Interactive</h4>
+        <div>ООО «ТЕАТИМ ИНТЕРАКТИВ»</div>
+        <div>ИНН 0264086177 · ОГРН 1250200035942</div>
+        <div class="ru">Республика Башкортостан, г. Нефтекамск</div><div class="en">Neftekamsk, Republic of Bashkortostan, Russia</div>
+      </div>
+      <div>
+        <h4 class="ru">Контакты</h4><h4 class="en">Contact</h4>
+        <div><a href="mailto:teateaminteractive@outlook.com">teateaminteractive@outlook.com</a></div>
+      </div>
+      <div>
+        <h4 class="ru">При поддержке</h4><h4 class="en">Supported by</h4>
+        <div class="logos">
+          <img class="logo-fasie" style="width:140px" src="assets/fasie.svg" alt="Фонд содействия инновациям">
+          <img class="logo-putp" style="width:84px" src="assets/putp.svg" alt="Платформа УТП">
+        </div>
+      </div>
+    </div>
+    <div class="legal">Проект реализован при поддержке Фонда содействия инновациям в рамках программы «Студенческий стартап» мероприятия «Платформа университетского технологического предпринимательства» федерального проекта «Технологии». © 2026 ООО «ТЕАТИМ ИНТЕРАКТИВ».</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b=document.body, btn=document.getElementById('lang');
+  function set(l){b.setAttribute('data-lang',l);document.documentElement.lang=l;btn.textContent=l==='ru'?'EN':'RU';try{localStorage.setItem('lang',l)}catch(e){}}
+  var saved=null;try{saved=localStorage.getItem('lang')}catch(e){}
+  if(saved==='en'||saved==='ru')set(saved);
+  btn.addEventListener('click',function(){set(b.getAttribute('data-lang')==='ru'?'en':'ru')});
+})();
+</script>
+</body>
+</html>
