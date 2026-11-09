@@ -144,6 +144,20 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 .lb .x{top:18px;right:18px}.lb .prev{left:18px;top:50%}.lb .next{right:18px;top:50%}
 @media (max-width:560px){.lb .prev,.lb .next{top:auto;bottom:18px}.lb .prev{left:30%}.lb .next{right:30%}}
 
+/* кадры в особенностях */
+.feat img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:14px;box-shadow:0 10px 26px rgba(40,25,10,.18);cursor:zoom-in;transition:transform .4s}
+.feat img:hover{transform:translateY(-2px)}
+/* осень и зима */
+.seasons{margin-top:46px}
+.cmp{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(40,25,10,.25);aspect-ratio:16/9;user-select:none;-webkit-user-select:none}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmp img.top{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.cmp .handle{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.45);pointer-events:none}
+.cmp .handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--ember);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;letter-spacing:2px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;touch-action:pan-y}
+.cmp .lab{position:absolute;top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#fff;background:rgba(0,0,0,.4);border-radius:999px;padding:4px 12px;pointer-events:none}
+.cmp .lab.l{left:14px}.cmp .lab.r{right:14px}
+.seasons .cap{margin:12px 0 0;color:var(--muted);font-size:14px;text-align:center}
 /* дорожная карта */
 .roadmap{border-top:1px solid var(--line)}
 .road{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}
@@ -262,7 +276,7 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       <div class="quote ru">«Пошли за едой, кабан ранил товарища, мы понесли его, напали волки - и мясо пришлось оставить у реки».</div>
       <div class="quote en">“We went out for food, a boar wounded our friend, we carried him back, wolves attacked - and we had to leave the meat by the river.”</div>
     </div>
-    <img class="zoomable" src="img/about.webp" alt="Охотники несут добычу, над ними кружит ворона" loading="lazy" data-t-ru="Добыча" data-q-ru="«Донести бы до лагеря, пока вороны не налетели»" data-t-en="The kill" data-q-en="“Get it back to camp before the crows do”">
+    <img class="zoomable" src="img/about.webp" alt="Охотница склонилась над раненым Тарном, рядом старейшина с факелом" loading="lazy" data-t-ru="Тарн ранен" data-q-ru="«Своих не бросаем - донесём до огня»" data-t-en="Tarn is wounded" data-q-en="“We don't leave our own - we'll carry him to the fire”">
   </div>
 </section>
 
@@ -305,12 +319,24 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
     <div class="eyebrow ru">Особенности</div><div class="eyebrow en">Features</div>
     <h2 class="ru">Что ждёт игроков</h2><h2 class="en">What awaits you</h2>
     <div class="list">
-      <div class="feat"><h3 class="ru">Кооператив на 1-4</h3><h3 class="en">Co-op for 1-4</h3><p class="ru">Играйте с друзьями или в одиночку с племенем NPC-спутников.</p><p class="en">Play with friends or solo with NPC tribe companions.</p></div>
-      <div class="feat"><h3 class="ru">Живые звери</h3><h3 class="en">Living animals</h3><p class="ru">Олени слышат и чуют по ветру, кабан предупреждает перед рывком, волки охотятся стаей ночью. Есть мамонт и саблезубый хищник.</p><p class="en">Deer hear and smell you downwind, boars warn before charging, wolves hunt in packs at night. Mammoths and saber-tooths roam.</p></div>
-      <div class="feat"><h3 class="ru">Погода и сезоны</h3><h3 class="en">Weather and seasons</h3><p class="ru">Дождь, снег, туман и ветер меняют охоту и выживание. Осень переходит в зиму.</p><p class="en">Rain, snow, fog and wind change hunting and survival. Autumn turns into winter.</p></div>
-      <div class="feat"><h3 class="ru">Лагерь и строительство</h3><h3 class="en">Camp and building</h3><p class="ru">Склад, навес, сушилка, шалаш и верстак. Огонь, тепло и запасы решают, переживёт ли племя ночь.</p><p class="en">Storage, shelter, drying rack, hut and workbench. Fire, warmth and food decide whether the tribe survives the night.</p></div>
-      <div class="feat"><h3 class="ru">Знания племени</h3><h3 class="en">Tribe knowledge</h3><p class="ru">Незнакомое сначала изучают: растения, камни, звери, места. Знания открывают новые действия и ремёсла.</p><p class="en">Study the unknown first - plants, stones, beasts, places. Knowledge unlocks new actions and crafts.</p></div>
-      <div class="feat"><h3 class="ru">Хроника</h3><h3 class="en">Chronicle</h3><p class="ru">Охоты, потери и открытия складываются в собственную историю вашего племени.</p><p class="en">Hunts, losses and discoveries become your tribe's own story.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-coop.webp" alt="Племя у вечернего костра" loading="lazy" data-t-ru="Племя у костра" data-q-ru="«Семеро у огня - уже сила»" data-t-en="The tribe at the fire" data-q-en="“Seven around the fire is already strength”"><h3 class="ru">Кооператив на 1-4</h3><h3 class="en">Co-op for 1-4</h3><p class="ru">Играйте с друзьями или в одиночку с племенем NPC-спутников.</p><p class="en">Play with friends or solo with NPC tribe companions.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-animals.webp" alt="Олень насторожился при подходе охотницы" loading="lazy" data-t-ru="Олень насторожился" data-q-ru="«Ветер в спину - и он уже знает»" data-t-en="The deer is alert" data-q-en="“Wind at your back - and he already knows”"><h3 class="ru">Живые звери</h3><h3 class="en">Living animals</h3><p class="ru">Олени слышат и чуют по ветру, кабан предупреждает перед рывком, волки охотятся стаей ночью. Есть мамонт и саблезубый хищник.</p><p class="en">Deer hear and smell you downwind, boars warn before charging, wolves hunt in packs at night. Mammoths and saber-tooths roam.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-weather.webp" alt="Охотница в тумане на лугу" loading="lazy" data-t-ru="Туман на лугу" data-q-ru="«В тумане слышно больше, чем видно»" data-t-en="Fog on the meadow" data-q-en="“In the fog you hear more than you see”"><h3 class="ru">Погода и сезоны</h3><h3 class="en">Weather and seasons</h3><p class="ru">Дождь, снег, туман и ветер меняют охоту и выживание. Осень переходит в зиму.</p><p class="en">Rain, snow, fog and wind change hunting and survival. Autumn turns into winter.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-camp.webp" alt="Режим строительства: место под хижину" loading="lazy" data-t-ru="Строим хижину" data-q-ru="«Здесь встанет хижина»" data-t-en="Building a hut" data-q-en="“A hut will stand here”"><h3 class="ru">Лагерь и строительство</h3><h3 class="en">Camp and building</h3><p class="ru">Склад, навес, сушилка, шалаш и верстак. Огонь, тепло и запасы решают, переживёт ли племя ночь.</p><p class="en">Storage, shelter, drying rack, hut and workbench. Fire, warmth and food decide whether the tribe survives the night.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-knowledge.webp" alt="Кровавый след раненого оленя" loading="lazy" data-t-ru="Кровавый след" data-q-ru="«Кровь свежая. Он ушёл к реке»" data-t-en="A blood trail" data-q-en="“Fresh blood. He went to the river”"><h3 class="ru">Знания племени</h3><h3 class="en">Tribe knowledge</h3><p class="ru">Незнакомое сначала изучают: растения, камни, звери, места. Знания открывают новые действия и ремёсла.</p><p class="en">Study the unknown first - plants, stones, beasts, places. Knowledge unlocks new actions and crafts.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-chronicle.webp" alt="Хроника племени по дням" loading="lazy" data-t-ru="Хроника племени" data-q-ru="«День 3: первый факел, первая хижина»" data-t-en="The tribe chronicle" data-q-en="“Day 3: first torch, first hut”"><h3 class="ru">Хроника</h3><h3 class="en">Chronicle</h3><p class="ru">Охоты, потери и открытия складываются в собственную историю вашего племени.</p><p class="en">Hunts, losses and discoveries become your tribe's own story.</p></div>
+    </div>
+    <div class="seasons">
+      <div class="cmp" id="cmp" style="--p:50%">
+        <img src="img/season-winter.webp" alt="Лагерь зимой" loading="lazy">
+        <img class="top" src="img/season-autumn.webp" alt="Тот же лагерь осенью" loading="lazy">
+        <span class="lab l"><span class="ru">Осень · день 3</span><span class="en">Autumn · day 3</span></span>
+        <span class="lab r"><span class="ru">Зима · день 9</span><span class="en">Winter · day 9</span></span>
+        <div class="handle" aria-hidden="true"><span>&#8249;&#8250;</span></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Осень или зима">
+      </div>
+      <p class="cap ru">Один и тот же лагерь. Потяните границу, чтобы увидеть, как осень сменяется зимой.</p>
+      <p class="cap en">The same camp. Drag the line to watch autumn turn into winter.</p>
     </div>
   </div>
 </section>
@@ -464,6 +490,10 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
   function loop(){if(!vis)return;fly();tm=setTimeout(loop,(14+Math.random()*8)*1000)}
   new IntersectionObserver(function(es){var was=vis;vis=es[0].isIntersecting;if(vis&&!was){clearTimeout(tm);tm=setTimeout(loop,900)}if(!vis)clearTimeout(tm)},{threshold:.35}).observe(sec);
 })();
+</script>
+<script>
+(function(){var c=document.getElementById('cmp');if(!c)return;var i=c.querySelector('input');
+  function set(){c.style.setProperty('--p',i.value+'%')}i.addEventListener('input',set);set();})();
 </script>
 </body>
 </html>
