@@ -68,7 +68,7 @@ section{padding:80px 0}
 .about .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
 .about p{color:#3b3229;font-size:17px}
 .about img{border-radius:14px;box-shadow:0 20px 50px rgba(40,25,10,.25)}
-.quote{font-family:"Cormorant Garamond",serif;font-size:26px;font-style:italic;border-left:3px solid var(--ember);padding-left:18px;margin:22px 0;color:var(--ink)}
+.quote{font-family:"Cormorant Garamond",serif;font-size:21px;line-height:1.35;font-style:italic;margin:20px 0;color:var(--ink)}
 
 /* pillars */
 .pillars{background:var(--paper-2)}
@@ -147,6 +147,7 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 /* кадры в особенностях */
 .feat img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin-bottom:14px;box-shadow:0 10px 26px rgba(40,25,10,.18);cursor:zoom-in;transition:transform .4s}
 .feat img:hover{transform:translateY(-2px)}
+.feat img.panel-img{box-shadow:none;border-radius:0;filter:drop-shadow(0 10px 18px rgba(40,25,10,.25))}
 /* осень и зима */
 .seasons{margin-top:46px}
 .cmp{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(40,25,10,.25);aspect-ratio:16/9;user-select:none;-webkit-user-select:none}
@@ -168,7 +169,8 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 .burger .x{display:none}
 .top.open .burger .x{display:block}.top.open .burger .b{display:none}
 /* частые вопросы */
-.faq .list{margin-top:26px;max-width:860px;border-top:1px solid var(--line)}
+.faq>.wrap{max-width:900px}
+.faq .list{margin-top:26px;border-top:1px solid var(--line)}
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 2px;font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700}
 .faq summary::-webkit-details-marker{display:none}
@@ -184,6 +186,42 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 .cta h2{color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.6)}
 .cta p{max-width:560px;margin:10px auto 26px;color:#efe7d7;font-size:17px;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .cta .eyebrow{color:#f0b27a}
+/* растительность по краям на широком экране */
+.about,.features,.faq,.bestiary{position:relative}
+html,body{overflow-x:clip}
+.about,.pillars,.features,.faq,.bestiary{overflow:visible!important}
+.flora{--fw:clamp(200px,calc(50vw - 460px),400px);display:block;position:absolute;bottom:0;height:0;width:var(--fw);z-index:3;pointer-events:none}
+.flora.l{left:max(calc(50% - 560px - var(--fw) + 40px),calc(var(--fw) * -.22))}.flora.r{right:max(calc(50% - 560px - var(--fw) + 40px),calc(var(--fw) * -.22))}
+.about>.wrap,.features>.wrap,.faq>.wrap,.bestiary>.wrap{position:relative;z-index:2}
+.plant{position:absolute;bottom:calc(var(--fw) * -.16);pointer-events:auto;transform-origin:50% 100%;cursor:default}
+.plant .pi{display:block;width:100%;position:relative;z-index:2;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite alternate;pointer-events:none}
+.plant:nth-child(2) .pi{animation-duration:6.3s;animation-delay:-2s}
+.plant .cr{position:absolute;bottom:6px;left:0;z-index:1;pointer-events:none;will-change:transform}
+.plant.rustle{animation:rustle .75s ease}
+@keyframes sway{from{transform:rotate(-.6deg)}to{transform:rotate(.7deg)}}
+@keyframes rustle{18%{transform:rotate(-2.6deg) skewX(2deg)}42%{transform:rotate(2.2deg) skewX(-1.6deg)}68%{transform:rotate(-1deg)}100%{transform:none}}
+.bf{position:absolute;left:0;top:0;width:var(--bfw,56px);z-index:4;pointer-events:none;will-change:transform,opacity}
+.plant img,.bf{box-shadow:none!important;border-radius:0!important;max-width:none;cursor:default!important}
+@media (max-width:1199px){.flora{--fw:clamp(170px,20vw,240px)}}
+@media (max-width:859px){
+  .flora{--fw:clamp(130px,38vw,190px)}
+  .flora.l{left:calc(var(--fw) * -.18)}.flora.r{right:calc(var(--fw) * -.18)}
+  .about,.pillars,.features,.bestiary,.faq{padding-bottom:calc(56px + 90px)}
+}
+@media (prefers-reduced-motion:reduce){.plant .pi{animation:none}.bf,.plant .cr{display:none}}
+/* бестиарий */
+.bestiary{background:var(--paper-2)}
+.bestiary .lead{max-width:640px;color:#3b3229;margin:0}
+.beasts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+.beast{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 12px 16px;transition:transform .3s,box-shadow .3s}
+.beast:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(40,25,10,.15)}
+.beast img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;cursor:zoom-in;display:block}
+.beast .bh{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 4px 6px}
+.beast h3{font-size:22px;margin:0}
+.beast p{margin:0 4px;color:var(--muted);font-size:14.5px;line-height:1.55}
+.danger{display:flex;gap:4px;flex:none}
+.danger .f{width:9px;height:14px;background:var(--line);clip-path:polygon(0 0,100% 0,50% 100%)}
+.danger .f.on{background:var(--ember)}
 /* дорожная карта */
 .roadmap{border-top:1px solid var(--line)}
 .road{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}
@@ -226,6 +264,7 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 @media (max-width:900px){
   .nav{display:none}
   .burger{display:inline-flex}
+  .beasts{grid-template-columns:1fr 1fr}
   .top.open .nav{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:56px;background:#141a22;padding:6px 16px 14px;border-top:1px solid rgba(244,236,220,.12)}
   .top.open .nav a{padding:12px 4px;font-size:16px;border-bottom:1px solid rgba(244,236,220,.08)}
   .top.open .nav a.on::after{display:none}
@@ -248,6 +287,10 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 @media (max-width:560px){
   section{padding:56px 0}
   .cards,.features .list,.facts{grid-template-columns:1fr}
+  .beasts{gap:12px}
+  .beast{padding:8px 8px 12px}
+  .beast h3{font-size:18px}
+  .beast p{font-size:13px}
   .btn.ghost{margin:10px 0 0}
   .logo-fasie{width:150px}.logo-putp{width:96px}
 }
@@ -262,6 +305,7 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       <a href="#about"><span class="ru">Об игре</span><span class="en">About</span></a>
       <a href="#gallery"><span class="ru">Кадры</span><span class="en">Screenshots</span></a>
       <a href="#features"><span class="ru">Особенности</span><span class="en">Features</span></a>
+      <a href="#bestiary"><span class="ru">Звери</span><span class="en">Beasts</span></a>
       <a href="#roadmap"><span class="ru">Планы</span><span class="en">Roadmap</span></a>
       <a href="#faq"><span class="ru">Вопросы</span><span class="en">FAQ</span></a>
       <a href="#studio"><span class="ru">Студия</span><span class="en">Studio</span></a>
@@ -300,6 +344,8 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 </section>
 
 <section class="about" id="about">
+  <div class="flora l" aria-hidden="true"><div class="plant" style="left:0%;width:55%;z-index:1"><img class="pi" src="img/flora/fern.webp" alt="" decoding="async"></div><div class="plant" data-c="vole" style="left:38%;width:58%;z-index:2"><img class="pi" src="img/flora/grass.webp" alt="" decoding="async"></div></div><div class="flora r" aria-hidden="true"><div class="plant" data-c="vole" style="left:2%;width:58%;z-index:2"><img class="pi" src="img/flora/tallgrass.webp" alt="" decoding="async"></div><div class="plant" style="left:30%;width:72%;z-index:1"><img class="pi" src="img/flora/fern-wide.webp" alt="" decoding="async"></div></div>
+
   <div class="wrap grid">
     <div>
       <div class="eyebrow ru">Об игре</div><div class="eyebrow en">About the game</div>
@@ -314,6 +360,8 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 </section>
 
 <section class="pillars">
+  <div class="flora l" aria-hidden="true"><div class="plant" style="left:0%;width:42%;z-index:1"><img class="pi" src="img/flora/grass.webp" alt="" decoding="async"></div><div class="plant" data-c="bfly" style="left:22%;width:78%;z-index:2"><img class="pi" src="img/flora/flowers.webp" alt="" decoding="async"></div></div><div class="flora r" aria-hidden="true"><div class="plant" data-c="bfly" style="left:0%;width:78%;z-index:2"><img class="pi" src="img/flora/flowers.webp" alt="" decoding="async"></div><div class="plant" style="left:58%;width:44%;z-index:1"><img class="pi" src="img/flora/fern.webp" alt="" decoding="async"></div></div>
+
   <div class="wrap">
     <div class="eyebrow ru">Столпы дизайна</div><div class="eyebrow en">Design pillars</div>
     <h2 class="ru">Четыре идеи, на которых стоит игра</h2><h2 class="en">Four ideas behind the game</h2>
@@ -348,16 +396,18 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 </section>
 
 <section class="features" id="features">
+  <div class="flora l" aria-hidden="true"><div class="plant" data-c="hare" style="left:4%;width:96%;z-index:2"><img class="pi" src="img/flora/shrub.webp" alt="" decoding="async"></div></div><div class="flora r" aria-hidden="true"><div class="plant" style="left:36%;width:66%;z-index:1"><img class="pi" src="img/flora/fern-wide.webp" alt="" decoding="async"></div><div class="plant" data-c="hare" style="left:0%;width:78%;z-index:2"><img class="pi" src="img/flora/berry.webp" alt="" decoding="async"></div></div>
+
   <div class="wrap">
     <div class="eyebrow ru">Особенности</div><div class="eyebrow en">Features</div>
     <h2 class="ru">Что ждёт игроков</h2><h2 class="en">What awaits you</h2>
     <div class="list">
-      <div class="feat"><img class="zoomable" src="img/feat-coop.webp" alt="Племя у вечернего костра" loading="lazy" data-t-ru="Племя у костра" data-q-ru="«Семеро у огня - уже сила»" data-t-en="The tribe at the fire" data-q-en="“Seven around the fire is already strength”"><h3 class="ru">Кооператив на 1-4</h3><h3 class="en">Co-op for 1-4</h3><p class="ru">Играйте с друзьями или в одиночку с племенем NPC-спутников.</p><p class="en">Play with friends or solo with NPC tribe companions.</p></div>
-      <div class="feat"><img class="zoomable" src="img/feat-animals.webp" alt="Олень насторожился при подходе охотницы" loading="lazy" data-t-ru="Олень насторожился" data-q-ru="«Ветер в спину - и он уже знает»" data-t-en="The deer is alert" data-q-en="“Wind at your back - and he already knows”"><h3 class="ru">Живые звери</h3><h3 class="en">Living animals</h3><p class="ru">Олени слышат и чуют по ветру, кабан предупреждает перед рывком, волки охотятся стаей ночью. Есть мамонт и саблезубый хищник.</p><p class="en">Deer hear and smell you downwind, boars warn before charging, wolves hunt in packs at night. Mammoths and saber-tooths roam.</p></div>
-      <div class="feat"><img class="zoomable" src="img/feat-weather.webp" alt="Охотница в тумане на лугу" loading="lazy" data-t-ru="Туман на лугу" data-q-ru="«В тумане слышно больше, чем видно»" data-t-en="Fog on the meadow" data-q-en="“In the fog you hear more than you see”"><h3 class="ru">Погода и сезоны</h3><h3 class="en">Weather and seasons</h3><p class="ru">Дождь, снег, туман и ветер меняют охоту и выживание. Осень переходит в зиму.</p><p class="en">Rain, snow, fog and wind change hunting and survival. Autumn turns into winter.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-coop.webp" alt="Ила, Тарн, Ору и ребёнок у ночного костра" loading="lazy" data-t-ru="Ночь у костра" data-q-ru="«Пока горит огонь, племя вместе»" data-t-en="Night by the fire" data-q-en="“While the fire burns, the tribe stays together”"><h3 class="ru">Кооператив на 1-4</h3><h3 class="en">Co-op for 1-4</h3><p class="ru">Играйте с друзьями или в одиночку с племенем NPC-спутников.</p><p class="en">Play with friends or solo with NPC tribe companions.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-animals.webp" alt="Олень насторожился у старого дуба" loading="lazy" data-t-ru="Олень насторожился" data-q-ru="«Ветер в спину - и он уже знает»" data-t-en="The deer is alert" data-q-en="“Wind at your back - and he already knows”"><h3 class="ru">Живые звери</h3><h3 class="en">Living animals</h3><p class="ru">Олени слышат и чуют по ветру, кабан предупреждает перед рывком, волки охотятся стаей ночью. Есть мамонт и саблезубый хищник.</p><p class="en">Deer hear and smell you downwind, boars warn before charging, wolves hunt in packs at night. Mammoths and saber-tooths roam.</p></div>
+      <div class="feat"><img class="zoomable" src="img/feat-weather.webp" alt="Дождь в лагере: племя у костра" loading="lazy" data-t-ru="Дождь в лагере" data-q-ru="«Держи огонь, пока не промокли дрова»" data-t-en="Rain in camp" data-q-en="“Keep the fire going before the wood gets soaked”"><h3 class="ru">Погода и сезоны</h3><h3 class="en">Weather and seasons</h3><p class="ru">Дождь, снег, туман и ветер меняют охоту и выживание. Осень переходит в зиму.</p><p class="en">Rain, snow, fog and wind change hunting and survival. Autumn turns into winter.</p></div>
       <div class="feat"><img class="zoomable" src="img/feat-camp.webp" alt="Режим строительства: место под хижину" loading="lazy" data-t-ru="Строим хижину" data-q-ru="«Здесь встанет хижина»" data-t-en="Building a hut" data-q-en="“A hut will stand here”"><h3 class="ru">Лагерь и строительство</h3><h3 class="en">Camp and building</h3><p class="ru">Склад, навес, сушилка, шалаш и верстак. Огонь, тепло и запасы решают, переживёт ли племя ночь.</p><p class="en">Storage, shelter, drying rack, hut and workbench. Fire, warmth and food decide whether the tribe survives the night.</p></div>
       <div class="feat"><img class="zoomable" src="img/feat-knowledge.webp" alt="Кровавый след раненого оленя" loading="lazy" data-t-ru="Кровавый след" data-q-ru="«Кровь свежая. Он ушёл к реке»" data-t-en="A blood trail" data-q-en="“Fresh blood. He went to the river”"><h3 class="ru">Знания племени</h3><h3 class="en">Tribe knowledge</h3><p class="ru">Незнакомое сначала изучают: растения, камни, звери, места. Знания открывают новые действия и ремёсла.</p><p class="en">Study the unknown first - plants, stones, beasts, places. Knowledge unlocks new actions and crafts.</p></div>
-      <div class="feat"><img class="zoomable" src="img/feat-chronicle.webp" alt="Хроника племени по дням" loading="lazy" data-t-ru="Хроника племени" data-q-ru="«День 3: первый факел, первая хижина»" data-t-en="The tribe chronicle" data-q-en="“Day 3: first torch, first hut”"><h3 class="ru">Хроника</h3><h3 class="en">Chronicle</h3><p class="ru">Охоты, потери и открытия складываются в собственную историю вашего племени.</p><p class="en">Hunts, losses and discoveries become your tribe's own story.</p></div>
+      <div class="feat"><img class="zoomable panel-img" src="img/feat-chronicle.webp" alt="Наскальные рисунки хроники племени" loading="lazy" data-t-ru="Наскальная хроника" data-q-ru="«Первый факел, первый снег, первая охота - всё остаётся на скале»" data-t-en="The rock chronicle" data-q-en="“First torch, first snow, first hunt - it all stays on the rock”"><h3 class="ru">Хроника</h3><h3 class="en">Chronicle</h3><p class="ru">Охоты, потери и открытия складываются в собственную историю вашего племени.</p><p class="en">Hunts, losses and discoveries become your tribe's own story.</p></div>
     </div>
     <div class="seasons">
       <div class="cmp" id="cmp" style="--p:50%">
@@ -370,6 +420,37 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
       </div>
       <p class="cap ru">Один и тот же лагерь. Потяните границу, чтобы увидеть, как осень сменяется зимой.</p>
       <p class="cap en">The same camp. Drag the line to watch autumn turn into winter.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bestiary" id="bestiary">
+  <div class="flora l" aria-hidden="true"><div class="plant" data-c="vole" style="left:10%;width:62%;z-index:2"><img class="pi" src="img/flora/tallgrass.webp" alt="" decoding="async"></div></div><div class="flora r" aria-hidden="true"><div class="plant" style="left:58%;width:40%;z-index:1"><img class="pi" src="img/flora/grass.webp" alt="" decoding="async"></div><div class="plant" style="left:0%;width:70%;z-index:2"><img class="pi" src="img/flora/cattail.webp" alt="" decoding="async"></div></div>
+
+  <div class="wrap">
+    <div class="eyebrow ru">Бестиарий</div><div class="eyebrow en">Bestiary</div>
+    <h2 class="ru">Кто бродит рядом</h2><h2 class="en">Who roams nearby</h2>
+    <p class="lead ru">Каждого зверя сначала изучают: его повадки, следы и то, чего он боится. Кадры из игры.</p>
+    <p class="lead en">Every beast is studied first: its habits, tracks and what it fears. In-game shots.</p>
+    <div class="beasts">
+      <article class="beast"><img class="zoomable" src="img/beast-deer.webp" alt="Олень" loading="lazy" data-t-ru="Олень" data-q-ru="«Насторожится, если подойти по ветру. Раненый уходит и оставляет кровавый след.»" data-t-en="Deer" data-q-en="“Turns alert if you approach downwind. A wounded deer flees and leaves a blood trail.”">
+        <div class="bh"><h3 class="ru">Олень</h3><h3 class="en">Deer</h3><span class="danger" title="Опасность 1 из 3"><i class="f on"></i><i class="f"></i><i class="f"></i></span></div>
+        <p class="ru">Насторожится, если подойти по ветру. Раненый уходит и оставляет кровавый след.</p><p class="en">Turns alert if you approach downwind. A wounded deer flees and leaves a blood trail.</p></article>
+      <article class="beast"><img class="zoomable" src="img/beast-boar.webp" alt="Кабан" loading="lazy" data-t-ru="Кабан" data-q-ru="«Тяжёлый, с клыками. Подойдёшь близко - бросается, но перед рывком предупреждает.»" data-t-en="Boar" data-q-en="“Heavy and tusked. Get too close and it charges, but it warns you first.”">
+        <div class="bh"><h3 class="ru">Кабан</h3><h3 class="en">Boar</h3><span class="danger" title="Опасность 2 из 3"><i class="f on"></i><i class="f on"></i><i class="f"></i></span></div>
+        <p class="ru">Тяжёлый, с клыками. Подойдёшь близко - бросается, но перед рывком предупреждает.</p><p class="en">Heavy and tusked. Get too close and it charges, but it warns you first.</p></article>
+      <article class="beast"><img class="zoomable" src="img/beast-wolf.webp" alt="Волки" loading="lazy" data-t-ru="Волки" data-q-ru="«Охотятся стаей ночью и кружат у лагеря. Огонь держит их на расстоянии.»" data-t-en="Wolves" data-q-en="“Hunt in packs at night and circle the camp. Fire keeps them at bay.”">
+        <div class="bh"><h3 class="ru">Волки</h3><h3 class="en">Wolves</h3><span class="danger" title="Опасность 2 из 3"><i class="f on"></i><i class="f on"></i><i class="f"></i></span></div>
+        <p class="ru">Охотятся стаей ночью и кружат у лагеря. Огонь держит их на расстоянии.</p><p class="en">Hunt in packs at night and circle the camp. Fire keeps them at bay.</p></article>
+      <article class="beast"><img class="zoomable" src="img/beast-bear.webp" alt="Пещерный медведь" loading="lazy" data-t-ru="Пещерный медведь" data-q-ru="«Приходит на запах мяса, даже к сушилке посреди лагеря.»" data-t-en="Cave bear" data-q-en="“Follows the smell of meat, right up to the drying rack in camp.”">
+        <div class="bh"><h3 class="ru">Пещерный медведь</h3><h3 class="en">Cave bear</h3><span class="danger" title="Опасность 3 из 3"><i class="f on"></i><i class="f on"></i><i class="f on"></i></span></div>
+        <p class="ru">Приходит на запах мяса, даже к сушилке посреди лагеря.</p><p class="en">Follows the smell of meat, right up to the drying rack in camp.</p></article>
+      <article class="beast"><img class="zoomable" src="img/beast-saber.webp" alt="Саблезубый" loading="lazy" data-t-ru="Саблезубый" data-q-ru="«Подкрадывается к одиночкам в сумерках. Держитесь вместе.»" data-t-en="Saber-tooth" data-q-en="“Stalks loners at dusk. Stay together.”">
+        <div class="bh"><h3 class="ru">Саблезубый</h3><h3 class="en">Saber-tooth</h3><span class="danger" title="Опасность 3 из 3"><i class="f on"></i><i class="f on"></i><i class="f on"></i></span></div>
+        <p class="ru">Подкрадывается к одиночкам в сумерках. Держитесь вместе.</p><p class="en">Stalks loners at dusk. Stay together.</p></article>
+      <article class="beast"><img class="zoomable" src="img/beast-mammoth.webp" alt="Мамонт" loading="lazy" data-t-ru="Мамонт" data-q-ru="«В одиночку не взять: только загоном всем племенем, с факелами и ловчей ямой.»" data-t-en="Mammoth" data-q-en="“Impossible alone: only a whole-tribe drive with torches and a pit trap.”">
+        <div class="bh"><h3 class="ru">Мамонт</h3><h3 class="en">Mammoth</h3><span class="danger" title="Опасность 3 из 3"><i class="f on"></i><i class="f on"></i><i class="f on"></i></span></div>
+        <p class="ru">В одиночку не взять: только загоном всем племенем, с факелами и ловчей ямой.</p><p class="en">Impossible alone: only a whole-tribe drive with torches and a pit trap.</p></article>
     </div>
   </div>
 </section>
@@ -389,6 +470,8 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
 </section>
 
 <section class="faq" id="faq">
+  <div class="flora l" aria-hidden="true"><div class="plant" style="left:8%;width:60%;z-index:2"><img class="pi" src="img/flora/fern.webp" alt="" decoding="async"></div></div><div class="flora r" aria-hidden="true"><div class="plant" data-c="bfly" style="left:6%;width:76%;z-index:2"><img class="pi" src="img/flora/flowers.webp" alt="" decoding="async"></div></div>
+
   <div class="wrap">
     <div class="eyebrow ru">Частые вопросы</div><div class="eyebrow en">FAQ</div>
     <h2 class="ru">Коротко о главном</h2><h2 class="en">The short version</h2>
@@ -497,6 +580,8 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
   function set(l){b.setAttribute('data-lang',l);document.documentElement.lang=l;btn.textContent=l==='ru'?'EN':'RU';try{localStorage.setItem('lang',l)}catch(e){}}
   var saved=null;try{saved=localStorage.getItem('lang')}catch(e){}
   if(saved==='en'||saved==='ru')set(saved);
+  else{var L=((navigator.languages&&navigator.languages.join(','))||navigator.language||'').toLowerCase();
+    if(L&&!/(^|,)(ru|uk|be|kk)/.test(L)){b.setAttribute('data-lang','en');document.documentElement.lang='en';btn.textContent='RU'}}
   btn.addEventListener('click',function(){set(b.getAttribute('data-lang')==='ru'?'en':'ru')});
 })();
 </script>
@@ -539,15 +624,6 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
   /* живой кадр: играет только на экране */
   var v=document.querySelector('.s-g video');
   if(v)new IntersectionObserver(function(es){if(es[0].isIntersecting){if(v.preload==='none'){v.preload='auto';v.load()}if(!reduce){var p=v.play();if(p&&p.catch)p.catch(function(){})}}else v.pause()},{rootMargin:'120px'}).observe(v);
-  /* бабочка пролетает над столпами */
-  var sec=document.querySelector('.pillars');if(!sec||reduce)return;var vis=false,tm=0;
-  function fly(){var img=new Image();img.src='img/live/butterfly.webp';img.className='butterfly';img.alt='';sec.appendChild(img);
-    var W=sec.clientWidth,H=sec.clientHeight,y0=H*(.15+Math.random()*.45),dur=(11+Math.random()*3)*1000,t0=performance.now(),ph=Math.random()*6.28,dir=Math.random()<.7?1:-1;
-    (function step(now){var f=(now-t0)/dur;if(f>1){img.remove();return}
-      var x=dir>0?-40+(W+80)*f:W+40-(W+80)*f,y=y0-f*H*.12+Math.sin(ph+f*6.28*1.9)*46+Math.sin(f*40)*4;
-      img.style.opacity=Math.min(1,Math.min(f,1-f)*10);img.style.transform='translate('+x+'px,'+y+'px) scaleX('+dir+')';requestAnimationFrame(step)})(t0)}
-  function loop(){if(!vis)return;fly();tm=setTimeout(loop,(14+Math.random()*8)*1000)}
-  new IntersectionObserver(function(es){var was=vis;vis=es[0].isIntersecting;if(vis&&!was){clearTimeout(tm);tm=setTimeout(loop,900)}if(!vis)clearTimeout(tm)},{threshold:.35}).observe(sec);
 })();
 </script>
 <script>
@@ -569,6 +645,46 @@ footer .logos{display:flex;gap:12px;margin-top:12px}
     var best=null,bv=0;for(var k in vis)if(vis[k]>bv){bv=vis[k];best=k}
     links.forEach(function(a){a.classList.toggle('on',!!best&&map[best]===a)})},{rootMargin:'-56px 0px -45% 0px',threshold:[0,.1,.25,.5,.75,1]});
   Object.keys(map).forEach(function(id){io.observe(document.getElementById(id))});
+})();
+</script>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var wide={matches:true};
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function rustle(pl){pl.classList.remove('rustle');void pl.offsetWidth;pl.classList.add('rustle')}
+  /* бабочки вылетают из цветов */
+  function bfly(pl){
+    var sec=pl.closest('section'),sr=sec.getBoundingClientRect(),pr=pl.getBoundingClientRect(),side=pl.parentNode.classList.contains('l')?-1:1;
+    var img=new Image();img.src='img/flora/bfly.webp';img.className='bf';img.alt='';img.style.setProperty('--bfw',Math.round(Math.max(38,Math.min(72,pr.width*.22)))+'px');sec.appendChild(img);
+    var x0=pr.left-sr.left+pr.width*rnd(.3,.7)-17,y0=pr.top-sr.top+pr.height*rnd(.15,.35),dur=rnd(5200,8200),
+        drift=rnd(80,220)*(Math.random()<.65?side:-side),rise=rnd(140,320),ph=rnd(0,6.28),t0=performance.now(),lx=x0;
+    (function step(now){var f=(now-t0)/dur;if(f>=1){img.remove();return}
+      var x=x0+drift*f+Math.sin(ph+f*Math.PI*3.2)*28,y=y0-rise*f-Math.sin(f*Math.PI*2+ph)*14+Math.sin(f*55)*2.5,
+          dx=x-lx;lx=x;img.style.opacity=Math.min(1,f*8,(1-f)*6);
+      img.style.transform='translate('+x+'px,'+y+'px) rotate('+(dx*6)+'deg) scaleX('+(dx<0?-1:1)+')';requestAnimationFrame(step)})(t0);
+    rustle(pl)}
+  /* заяц и мышь: выглядывают, сидят, прячутся */
+  var CR={hare:{f:['img/flora/hare1.webp','img/flora/hare2.webp'],w:.42,hop:24,hops:3,step:270,out:.62,sit:[1800,3200]},
+          vole:{f:['img/flora/vole1.webp','img/flora/vole2.webp'],w:.36,hop:6,hops:4,step:120,out:.55,sit:[1200,2400]}};
+  function peek(pl){
+    if(pl._busy)return;pl._busy=1;var c=CR[pl.dataset.c],W=pl.offsetWidth,side=pl.parentNode.classList.contains('l')?1:-1;
+    var im=new Image();im.src=c.f[0];im.className='cr';im.alt='';var w=Math.round(W*c.w);im.style.width=w+'px';pl.insertBefore(im,pl.firstChild);
+    var xa=(W-w)/2,xb=side>0?W*c.out+W*.25:-(W*c.out+w*.1)+W*.05,face=side>0?1:-1,n=c.hops;
+    function kf(a,b,s){var k=[];for(var i=0;i<=n*2;i++){var t=i/(n*2),x=a+(b-a)*t,y=(i%2)?-c.hop:0;k.push({transform:'translate('+x+'px,'+y+'px) scaleX('+s+')'})}return k}
+    rustle(pl);
+    var a1=im.animate(kf(xa,xb,face),{duration:c.step*n,easing:'linear',fill:'forwards'});
+    a1.onfinish=function(){var i=0,iv=setInterval(function(){i^=1;im.src=c.f[i]},rnd(260,420));
+      setTimeout(function(){clearInterval(iv);im.src=c.f[0];
+        var a2=im.animate(kf(xb,xa,-face),{duration:c.step*n,easing:'linear',fill:'forwards'});
+        a2.onfinish=function(){rustle(pl);im.remove();pl._busy=0}},rnd(c.sit[0],c.sit[1]))}}
+  function act(pl){if(pl.dataset.c==='bfly'){bfly(pl);if(Math.random()<.4)setTimeout(function(){bfly(pl)},rnd(300,900))}else peek(pl)}
+  var plants=[].slice.call(document.querySelectorAll('.plant[data-c]'));
+  plants.forEach(function(pl){pl.addEventListener('click',function(){act(pl)});pl.addEventListener('mouseenter',function(){if(!pl._hov||Date.now()-pl._hov>1500){pl._hov=Date.now();act(pl)}})});
+  [].forEach.call(document.querySelectorAll('section'),function(sec){
+    var ps=[].slice.call(sec.querySelectorAll('.plant[data-c]'));if(!ps.length)return;var vis=false,tm=0;
+    function loop(){if(!vis||!wide.matches)return;act(ps[Math.floor(Math.random()*ps.length)]);tm=setTimeout(loop,rnd(5000,9000))}
+    new IntersectionObserver(function(es){var was=vis;vis=es[0].isIntersecting;if(vis&&!was){clearTimeout(tm);tm=setTimeout(loop,rnd(700,1500))}if(!vis)clearTimeout(tm)},{threshold:.3}).observe(sec)});
 })();
 </script>
 </body>
